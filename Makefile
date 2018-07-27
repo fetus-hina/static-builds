@@ -1,7 +1,8 @@
 SUB_DIRS := \
 	brotli \
 	curl \
-	jpegoptim
+	jpegoptim \
+	zopfli
 
 .PHONY: all clean dist-clean $(SUB_DIRS)
 all: $(SUB_DIRS)
