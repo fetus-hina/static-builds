@@ -1,4 +1,4 @@
-SUB_DIRS := curl
+SUB_DIRS := brotli curl
 
 .PHONY: all clean dist-clean $(SUB_DIRS)
 all: $(SUB_DIRS)
