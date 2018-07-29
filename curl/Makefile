@@ -6,7 +6,6 @@ IMAGE_NAME := curl_builder
 all: $(BINARY)
 
 $(BINARY): build
-	mkdir -p bin
 	docker run --name $(IMAGE_NAME)-exec $(IMAGE_NAME)
 	docker wait $(IMAGE_NAME)-exec
 	docker cp $(IMAGE_NAME)-exec:/opt/curl/bin/curl $@
