@@ -28,6 +28,7 @@ RUN wget -O /root/zlib.tar.xz 'http://zlib.net/zlib-1.2.11.tar.xz' && \
     scl enable devtoolset-7 -- make install && \
     rm -rf /root/zlib.tar.xz /root/zlib
 
+
 # libjpeg
 # http://www.ijg.org/
 RUN wget -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files/jpegsrc.v9c.tar.gz' && \
@@ -72,6 +73,7 @@ RUN wget -O /root/c-ares.tar.gz 'https://c-ares.haxx.se/download/c-ares-1.14.0.t
     scl enable devtoolset-7 -- make install && \
     rm -rf /root/c-ares.tar.gz /root/c-ares
 
+
 # https://ftp.gnu.org/gnu/libidn/?C=N;O=D
 RUN wget -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu/libidn/libidn2-2.0.5.tar.gz' && \
     mkdir /root/libidn2 && \
@@ -85,6 +87,7 @@ RUN wget -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu/libidn/libidn2-2.0.5.t
     scl enable devtoolset-7 -- make -j 4 && \
     scl enable devtoolset-7 -- make install && \
     rm -rf /root/libidn2.tar.gz /root/libidn2
+
 
 # https://www.openssl.org/
 RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1-pre8.tar.gz' && \
@@ -169,6 +172,7 @@ RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.61.0.tar.xz'
     strip /opt/bin/curl && \
     rm -rf /root/curl.tar.xz /root/curl
 
+
 RUN git clone --depth 1 'https://github.com/tjko/jpegoptim.git' && \
     cd jpegoptim && \
     scl enable devtoolset-7 -- env CFLAGS="-O3 -fPIC" LDFLAGS="-static" ./configure \
@@ -179,6 +183,7 @@ RUN git clone --depth 1 'https://github.com/tjko/jpegoptim.git' && \
     scl enable devtoolset-7 -- make strip && \
     scl enable devtoolset-7 -- make install && \
     rm -rf /root/jpegoptim
+
 
 COPY patches/zopfli-* /tmp/
 RUN wget -O /root/zopfli.tar.gz https://github.com/google/zopfli/archive/zopfli-1.0.2.tar.gz && \
@@ -193,6 +198,7 @@ RUN wget -O /root/zopfli.tar.gz https://github.com/google/zopfli/archive/zopfli-
     cp zopfli zopflipng /opt/bin/ && \
     rm -rf /root/zopfli
 
+
 RUN wget -O /root/brotli.tar.gz https://github.com/google/brotli/archive/v1.0.5.tar.gz && \
     mkdir -p /root/brotli && \
     cd /root/brotli && \
@@ -205,11 +211,10 @@ RUN wget -O /root/brotli.tar.gz https://github.com/google/brotli/archive/v1.0.5.
         -DCMAKE_C_FLAGS="-fPIC -O3" \
         -DCMAKE_EXE_LINKER_FLAGS="-fPIC --static" \
         /root/brotli && \
-    scl enable devtoolset-7 -- \
-    cmake \
-    --build . \
-    --config Release \
-    --target install && \
+    scl enable devtoolset-7 -- cmake \
+        --build . \
+        --config Release \
+        --target install && \
     strip /opt/brotli/bin/brotli && \
     cp /opt/brotli/bin/brotli /opt/bin/ && \
     rm -rf /root/brotli*
