@@ -42,7 +42,7 @@ RUN wget -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files/jpegsrc.v9c.tar.gz' &&
 
 
 # https://github.com/nghttp2/nghttp2
-RUN wget -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.32.0/nghttp2-1.32.0.tar.xz' && \
+RUN wget -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.33.0/nghttp2-1.33.0.tar.xz' && \
     mkdir /root/nghttp2 && \
     cd /root/nghttp2 && \
     tar -J -x -v -f /root/nghttp2.tar.xz --strip-components=1 && \
@@ -90,7 +90,7 @@ RUN wget -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu/libidn/libidn2-2.0.5.t
 
 
 # https://www.openssl.org/
-RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1-pre9.tar.gz' && \
+RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1.tar.gz' && \
     mkdir /root/openssl && \
     cd /root/openssl && \
     tar -z -x -v -f /root/openssl.tar.gz --strip-components=1 && \
@@ -112,7 +112,7 @@ RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1-p
 
  
 # https://curl.haxx.se/
-RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.61.0.tar.xz' && \
+RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.61.1.tar.xz' && \
     mkdir /root/curl && \
     cd /root/curl && \
     tar -J -x -v -f /root/curl.tar.xz --strip-components=1 && \
