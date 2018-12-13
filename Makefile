@@ -2,6 +2,7 @@ BINARIES := \
 	brotli \
 	curl \
 	jpegoptim \
+	openssl \
 	zopfli \
 	zopflipng
 

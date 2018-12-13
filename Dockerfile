@@ -16,7 +16,8 @@ RUN yum update -y && \
         wget \
         xz && \
     yum clean all && \
-    rm -rf /var/cache/yum
+    rm -rf /var/cache/yum && \
+    mkdir -p /opt/bin
 
 # http://zlib.net/
 RUN wget -O /root/zlib.tar.xz 'http://zlib.net/zlib-1.2.11.tar.xz' && \
@@ -42,7 +43,7 @@ RUN wget -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files/jpegsrc.v9c.tar.gz' &&
 
 
 # https://github.com/nghttp2/nghttp2
-RUN wget -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.34.0/nghttp2-1.34.0.tar.xz' && \
+RUN wget -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.35.1/nghttp2-1.35.1.tar.xz' && \
     mkdir /root/nghttp2 && \
     cd /root/nghttp2 && \
     tar -J -x -v -f /root/nghttp2.tar.xz --strip-components=1 && \
@@ -90,7 +91,7 @@ RUN wget -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu/libidn/libidn2-2.0.5.t
 
 
 # https://www.openssl.org/
-RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1.tar.gz' && \
+RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1a.tar.gz' && \
     mkdir /root/openssl && \
     cd /root/openssl && \
     tar -z -x -v -f /root/openssl.tar.gz --strip-components=1 && \
@@ -108,11 +109,13 @@ RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1.t
         -static && \
     scl enable devtoolset-7 -- make -j 4 && \
     scl enable devtoolset-7 -- make install && \
+    strip /opt/openssl/bin/openssl && \
+    cp /opt/openssl/bin/openssl /opt/bin/ && \
     rm -rf /root/openssl.tar.gz /root/openssl
 
  
 # https://curl.haxx.se/
-RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.62.0.tar.xz' && \
+RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.63.0.tar.xz' && \
     mkdir /root/curl && \
     cd /root/curl && \
     tar -J -x -v -f /root/curl.tar.xz --strip-components=1 && \
