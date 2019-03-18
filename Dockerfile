@@ -43,7 +43,7 @@ RUN wget -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files/jpegsrc.v9c.tar.gz' &&
 
 
 # https://github.com/nghttp2/nghttp2
-RUN wget -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.36.0/nghttp2-1.36.0.tar.xz' && \
+RUN wget -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.37.0/nghttp2-1.37.0.tar.xz' && \
     mkdir /root/nghttp2 && \
     cd /root/nghttp2 && \
     tar -J -x -v -f /root/nghttp2.tar.xz --strip-components=1 && \
@@ -188,6 +188,7 @@ RUN git clone --depth 1 'https://github.com/tjko/jpegoptim.git' && \
     rm -rf /root/jpegoptim
 
 
+# https://github.com/google/zopfli/releases
 COPY patches/zopfli-* /tmp/
 RUN wget -O /root/zopfli.tar.gz https://github.com/google/zopfli/archive/zopfli-1.0.2.tar.gz && \
     mkdir -p /root/zopfli && \
@@ -202,6 +203,7 @@ RUN wget -O /root/zopfli.tar.gz https://github.com/google/zopfli/archive/zopfli-
     rm -rf /root/zopfli
 
 
+# https://github.com/google/brotli/releases
 RUN wget -O /root/brotli.tar.gz https://github.com/google/brotli/archive/v1.0.7.tar.gz && \
     mkdir -p /root/brotli && \
     cd /root/brotli && \
