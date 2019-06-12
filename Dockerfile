@@ -29,18 +29,20 @@ RUN wget -O /root/zlib.tar.xz 'http://zlib.net/zlib-1.2.11.tar.xz' && \
     scl enable devtoolset-7 -- make install && \
     rm -rf /root/zlib.tar.xz /root/zlib
 
-
 # libjpeg
 # http://www.ijg.org/
+COPY patches/jpegtran-* /tmp/
 RUN wget -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files/jpegsrc.v9c.tar.gz' && \
     mkdir /root/libjpeg && \
     cd /root/libjpeg && \
     tar -zxf /tmp/libjpeg.tar.gz --strip-components=1 && \
-    scl enable devtoolset-7 -- env CFLAGS="-O3 -fPIC" LDFLAGS="-static" ./configure --prefix=/opt/libjpeg && \
+    scl enable devtoolset-7 -- ./configure --prefix=/opt/libjpeg --enable-static --with-pic CFLAGS="-O3" LDFLAGS="-static" && \
+    patch < /tmp/jpegtran-static.patch && \
     scl enable devtoolset-7 -- make && \
     scl enable devtoolset-7 -- make install && \
+    strip /opt/libjpeg/bin/jpegtran && \
+    cp /opt/libjpeg/bin/jpegtran /opt/bin/ && \
     rm -rf /root/libjpeg /tmp/libjpeg.tar.gz
-
 
 # https://github.com/nghttp2/nghttp2
 RUN wget -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.38.0/nghttp2-1.38.0.tar.xz' && \

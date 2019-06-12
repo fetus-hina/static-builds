@@ -1,0 +1,11 @@
+--- Makefile
++++ Makefile
+@@ -640,7 +640,7 @@
+ 
+ jpegtran$(EXEEXT): $(jpegtran_OBJECTS) $(jpegtran_DEPENDENCIES) $(EXTRA_jpegtran_DEPENDENCIES) 
+ 	@rm -f jpegtran$(EXEEXT)
+-	$(AM_V_CCLD)$(LINK) $(jpegtran_OBJECTS) $(jpegtran_LDADD) $(LIBS)
++	$(AM_V_CCLD)$(LINK) -all-static $(jpegtran_OBJECTS) $(jpegtran_LDADD) $(LIBS)
+ 
+ rdjpgcom$(EXEEXT): $(rdjpgcom_OBJECTS) $(rdjpgcom_DEPENDENCIES) $(EXTRA_rdjpgcom_DEPENDENCIES) 
+ 	@rm -f rdjpgcom$(EXEEXT)
