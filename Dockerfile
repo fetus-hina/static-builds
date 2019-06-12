@@ -226,5 +226,18 @@ RUN wget -O /root/brotli.tar.gz https://github.com/google/brotli/archive/v1.0.7.
     cp /opt/brotli/bin/brotli /opt/bin/ && \
     rm -rf /root/brotli*
 
+# http://optipng.sourceforge.net/
+RUN wget -O /root/optipng.tar.gz https://downloads.sourceforge.net/project/optipng/OptiPNG/optipng-0.7.7/optipng-0.7.7.tar.gz && \
+    mkdir -p /root/optipng && \
+    cd /root/optipng && \
+    tar -zxvf /root/optipng.tar.gz --strip-components=1 && \
+    scl enable devtoolset-7 -- env LDFLAGS="-static" ./configure \
+        -prefix=/opt/optipng \
+        -bindir=/opt/bin && \
+    scl enable devtoolset-7 -- env LDFLAGS="-static" make -j 4 && \
+    scl enable devtoolset-7 -- make install && \
+    strip /opt/bin/optipng && \
+    rm -rf /root/optipng*
+
 RUN cd /opt && \
     tar -zcvf bin.tar.gz bin

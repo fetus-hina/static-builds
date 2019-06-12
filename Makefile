@@ -4,6 +4,7 @@ BINARIES := \
 	jpegoptim \
 	jpegtran \
 	openssl \
+	optipng \
 	zopfli \
 	zopflipng
 
