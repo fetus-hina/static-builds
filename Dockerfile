@@ -93,7 +93,7 @@ RUN wget -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu/libidn/libidn2-latest.
 
 
 # https://www.openssl.org/
-RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1c.tar.gz' && \
+RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1d.tar.gz' && \
     mkdir /root/openssl && \
     cd /root/openssl && \
     tar -z -x -v -f /root/openssl.tar.gz --strip-components=1 && \
@@ -117,7 +117,7 @@ RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1c.
 
  
 # https://curl.haxx.se/
-RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.65.3.tar.xz' && \
+RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.66.0.tar.xz' && \
     mkdir /root/curl && \
     cd /root/curl && \
     tar -J -x -v -f /root/curl.tar.xz --strip-components=1 && \
