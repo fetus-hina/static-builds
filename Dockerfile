@@ -32,7 +32,7 @@ RUN wget -O /root/zlib.tar.xz 'http://zlib.net/zlib-1.2.11.tar.xz' && \
 # libjpeg
 # http://www.ijg.org/
 COPY patches/jpegtran-* /tmp/
-RUN wget -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files/jpegsrc.v9c.tar.gz' && \
+RUN wget -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files/jpegsrc.v9d.tar.gz' && \
     mkdir /root/libjpeg && \
     cd /root/libjpeg && \
     tar -zxf /tmp/libjpeg.tar.gz --strip-components=1 && \
@@ -117,7 +117,7 @@ RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1d.
 
  
 # https://curl.haxx.se/
-RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.67.0.tar.xz' && \
+RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.68.0.tar.xz' && \
     mkdir /root/curl && \
     cd /root/curl && \
     tar -J -x -v -f /root/curl.tar.xz --strip-components=1 && \
@@ -192,12 +192,11 @@ RUN git clone --depth 1 'https://github.com/tjko/jpegoptim.git' && \
 
 # https://github.com/google/zopfli/releases
 COPY patches/zopfli-* /tmp/
-RUN wget -O /root/zopfli.tar.gz https://github.com/google/zopfli/archive/zopfli-1.0.2.tar.gz && \
+RUN wget -O /root/zopfli.tar.gz https://github.com/google/zopfli/archive/zopfli-1.0.3.tar.gz && \
     mkdir -p /root/zopfli && \
     cd /root/zopfli && \
     tar -zxvf /root/zopfli.tar.gz --strip-components=1 && \
-    patch < /tmp/zopfli-static.patch && \
-    scl enable devtoolset-7 -- make -j 4 zopfli zopflipng && \
+    scl enable devtoolset-7 -- env CFLAGS="-static" CXXFLAGS="-static" make -j 4 zopfli zopflipng && \
     strip zopfli && \
     strip zopflipng && \
     mkdir -p /opt/bin && \
