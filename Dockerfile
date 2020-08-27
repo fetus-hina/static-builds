@@ -117,7 +117,7 @@ RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1g.
 
  
 # https://curl.haxx.se/
-RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.71.1.tar.xz' && \
+RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.72.0.tar.xz' && \
     mkdir /root/curl && \
     cd /root/curl && \
     tar -J -x -v -f /root/curl.tar.xz --strip-components=1 && \
@@ -205,7 +205,7 @@ RUN wget -O /root/zopfli.tar.gz https://github.com/google/zopfli/archive/zopfli-
 
 
 # https://github.com/google/brotli/releases
-RUN wget -O /root/brotli.tar.gz https://github.com/google/brotli/archive/v1.0.7.tar.gz && \
+RUN wget -O /root/brotli.tar.gz https://github.com/google/brotli/archive/v1.0.8.tar.gz && \
     mkdir -p /root/brotli && \
     cd /root/brotli && \
     tar -zxvf /root/brotli.tar.gz --strip-components=1 && \
@@ -226,7 +226,10 @@ RUN wget -O /root/brotli.tar.gz https://github.com/google/brotli/archive/v1.0.7.
     rm -rf /root/brotli*
 
 # http://optipng.sourceforge.net/
-RUN wget -O /root/optipng.tar.gz https://downloads.sourceforge.net/project/optipng/OptiPNG/optipng-0.7.7/optipng-0.7.7.tar.gz && \
+# RUN wget -O /root/optipng.tar.gz https://downloads.sourceforge.net/project/optipng/OptiPNG/optipng-0.7.7/optipng-0.7.7.tar.gz && \
+RUN /opt/bin/curl -fsSL -o /root/optipng.tar.gz \
+        --resolve downloads.sourceforge.net:443:216.105.38.13 \
+        https://downloads.sourceforge.net/project/optipng/OptiPNG/optipng-0.7.7/optipng-0.7.7.tar.gz && \
     mkdir -p /root/optipng && \
     cd /root/optipng && \
     tar -zxvf /root/optipng.tar.gz --strip-components=1 && \
