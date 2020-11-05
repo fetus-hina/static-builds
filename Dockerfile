@@ -93,7 +93,7 @@ RUN wget -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu/libidn/libidn2-latest.
 
 
 # https://www.openssl.org/
-RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1g.tar.gz' && \
+RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1h.tar.gz' && \
     mkdir /root/openssl && \
     cd /root/openssl && \
     tar -z -x -v -f /root/openssl.tar.gz --strip-components=1 && \
@@ -117,10 +117,12 @@ RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1g.
 
  
 # https://curl.haxx.se/
-RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.72.0.tar.xz' && \
+COPY patches/curl-* /tmp/
+RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.73.0.tar.xz' && \
     mkdir /root/curl && \
     cd /root/curl && \
     tar -J -x -v -f /root/curl.tar.xz --strip-components=1 && \
+    patch -p1 < /tmp/curl-6094.patch && \
     scl enable devtoolset-8 -- env LD_FLAGS="-static" PKG_CONFIG="pkg-config --static" ./configure \
         --prefix=/opt/curl \
         --bindir=/opt/bin \
@@ -205,7 +207,7 @@ RUN wget -O /root/zopfli.tar.gz https://github.com/google/zopfli/archive/zopfli-
 
 
 # https://github.com/google/brotli/releases
-RUN wget -O /root/brotli.tar.gz https://github.com/google/brotli/archive/v1.0.8.tar.gz && \
+RUN wget -O /root/brotli.tar.gz https://github.com/google/brotli/archive/v1.0.9.tar.gz && \
     mkdir -p /root/brotli && \
     cd /root/brotli && \
     tar -zxvf /root/brotli.tar.gz --strip-components=1 && \
