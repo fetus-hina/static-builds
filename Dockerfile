@@ -129,7 +129,7 @@ RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1k.
 
  
 # https://curl.haxx.se/
-RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.75.0.tar.xz' && \
+RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.76.1.tar.xz' && \
     mkdir /root/curl && \
     cd /root/curl && \
     tar -J -x -v -f /root/curl.tar.xz --strip-components=1 && \
