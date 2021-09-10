@@ -57,7 +57,7 @@ RUN wget -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files/jpegsrc.v9d.tar.gz' &&
     rm -rf /root/libjpeg /tmp/libjpeg.tar.gz
 
 # https://github.com/nghttp2/nghttp2
-RUN wget -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.43.0/nghttp2-1.43.0.tar.xz' && \
+RUN wget -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.44.0/nghttp2-1.44.0.tar.xz' && \
     mkdir /root/nghttp2 && \
     cd /root/nghttp2 && \
     tar -J -x -v -f /root/nghttp2.tar.xz --strip-components=1 && \
@@ -74,7 +74,7 @@ RUN wget -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/do
     rm -rf /root/nghttp2.tar.xz /root/nghttp2
 
 # https://c-ares.haxx.se/
-RUN wget -O /root/c-ares.tar.gz 'https://c-ares.haxx.se/download/c-ares-1.17.1.tar.gz' && \
+RUN wget -O /root/c-ares.tar.gz 'https://c-ares.haxx.se/download/c-ares-1.17.2.tar.gz' && \
     mkdir /root/c-ares && \
     cd /root/c-ares && \
     tar -z -x -v -f /root/c-ares.tar.gz --strip-components=1 && \
@@ -105,7 +105,7 @@ RUN wget -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu/libidn/libidn2-latest.
 
 
 # https://www.openssl.org/
-RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1k.tar.gz' && \
+RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1l.tar.gz' && \
     mkdir /root/openssl && \
     cd /root/openssl && \
     tar -z -x -v -f /root/openssl.tar.gz --strip-components=1 && \
@@ -129,7 +129,7 @@ RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1k.
 
  
 # https://curl.haxx.se/
-RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.76.1.tar.xz' && \
+RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.78.0.tar.xz' && \
     mkdir /root/curl && \
     cd /root/curl && \
     tar -J -x -v -f /root/curl.tar.xz --strip-components=1 && \
