@@ -31,8 +31,12 @@ RUN yum install -y \
     rm -rf /var/cache/yum && \
     mkdir -p /opt/bin
 
+COPY files/etc--pki--tls--certs--ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
+RUN cp /etc/pki/tls/certs/ca-bundle.crt /usr/share/pki/ca-trust-source/ca-bundle.trust.crt && \
+    update-ca-trust extract
+
 # http://zlib.net/
-RUN wget -O /root/zlib.tar.xz 'http://zlib.net/zlib-1.2.11.tar.xz' && \
+RUN wget --no-check-certificate -O /root/zlib.tar.xz 'http://zlib.net/zlib-1.2.13.tar.xz' && \
     mkdir /root/zlib && \
     cd /root/zlib && \
     tar -J -x -v -f /root/zlib.tar.xz --strip-components=1 && \
@@ -44,7 +48,7 @@ RUN wget -O /root/zlib.tar.xz 'http://zlib.net/zlib-1.2.11.tar.xz' && \
 # libjpeg
 # http://www.ijg.org/
 COPY patches/jpegtran-* /tmp/
-RUN wget -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files/jpegsrc.v9d.tar.gz' && \
+RUN wget --no-check-certificate -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files/jpegsrc.v9e.tar.gz' && \
     mkdir /root/libjpeg && \
     cd /root/libjpeg && \
     tar -zxf /tmp/libjpeg.tar.gz --strip-components=1 && \
@@ -57,7 +61,7 @@ RUN wget -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files/jpegsrc.v9d.tar.gz' &&
     rm -rf /root/libjpeg /tmp/libjpeg.tar.gz
 
 # https://github.com/nghttp2/nghttp2
-RUN wget -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.44.0/nghttp2-1.44.0.tar.xz' && \
+RUN wget --no-check-certificate -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.52.0/nghttp2-1.52.0.tar.xz' && \
     mkdir /root/nghttp2 && \
     cd /root/nghttp2 && \
     tar -J -x -v -f /root/nghttp2.tar.xz --strip-components=1 && \
@@ -74,7 +78,7 @@ RUN wget -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/do
     rm -rf /root/nghttp2.tar.xz /root/nghttp2
 
 # https://c-ares.haxx.se/
-RUN wget -O /root/c-ares.tar.gz 'https://c-ares.haxx.se/download/c-ares-1.17.2.tar.gz' && \
+RUN wget --no-check-certificate -O /root/c-ares.tar.gz 'https://c-ares.haxx.se/download/c-ares-1.19.0.tar.gz' && \
     mkdir /root/c-ares && \
     cd /root/c-ares && \
     tar -z -x -v -f /root/c-ares.tar.gz --strip-components=1 && \
@@ -90,7 +94,7 @@ RUN wget -O /root/c-ares.tar.gz 'https://c-ares.haxx.se/download/c-ares-1.17.2.t
 
 
 # https://ftp.gnu.org/gnu/libidn/?C=N;O=D
-RUN wget -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu/libidn/libidn2-latest.tar.gz' && \
+RUN wget --no-check-certificate -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu/libidn/libidn2-latest.tar.gz' && \
     mkdir /root/libidn2 && \
     cd /root/libidn2 && \
     tar -z -x -v -f /root/libidn2.tar.gz --strip-components=1 && \
@@ -105,7 +109,7 @@ RUN wget -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu/libidn/libidn2-latest.
 
 
 # https://www.openssl.org/
-RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1l.tar.gz' && \
+RUN wget --no-check-certificate -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1t.tar.gz' && \
     mkdir /root/openssl && \
     cd /root/openssl && \
     tar -z -x -v -f /root/openssl.tar.gz --strip-components=1 && \
@@ -129,7 +133,7 @@ RUN wget -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-1.1.1l.
 
  
 # https://curl.haxx.se/
-RUN wget -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-7.78.0.tar.xz' && \
+RUN wget --no-check-certificate -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-8.0.1.tar.xz' && \
     mkdir /root/curl && \
     cd /root/curl && \
     tar -J -x -v -f /root/curl.tar.xz --strip-components=1 && \
@@ -204,7 +208,7 @@ RUN git clone --depth 1 'https://github.com/tjko/jpegoptim.git' && \
 
 # https://github.com/google/zopfli/releases
 COPY patches/zopfli-* /tmp/
-RUN wget -O /root/zopfli.tar.gz https://github.com/google/zopfli/archive/zopfli-1.0.3.tar.gz && \
+RUN wget --no-check-certificate -O /root/zopfli.tar.gz https://github.com/google/zopfli/archive/zopfli-1.0.3.tar.gz && \
     mkdir -p /root/zopfli && \
     cd /root/zopfli && \
     tar -zxvf /root/zopfli.tar.gz --strip-components=1 && \
@@ -217,7 +221,7 @@ RUN wget -O /root/zopfli.tar.gz https://github.com/google/zopfli/archive/zopfli-
 
 
 # https://github.com/google/brotli/releases
-RUN wget -O /root/brotli.tar.gz https://github.com/google/brotli/archive/v1.0.9.tar.gz && \
+RUN wget --no-check-certificate -O /root/brotli.tar.gz https://github.com/google/brotli/archive/v1.0.9.tar.gz && \
     mkdir -p /root/brotli && \
     cd /root/brotli && \
     tar -zxvf /root/brotli.tar.gz --strip-components=1 && \
@@ -238,7 +242,7 @@ RUN wget -O /root/brotli.tar.gz https://github.com/google/brotli/archive/v1.0.9.
     rm -rf /root/brotli*
 
 # http://optipng.sourceforge.net/
-# RUN wget -O /root/optipng.tar.gz https://downloads.sourceforge.net/project/optipng/OptiPNG/optipng-0.7.7/optipng-0.7.7.tar.gz && \
+# RUN wget --no-check-certificate -O /root/optipng.tar.gz https://downloads.sourceforge.net/project/optipng/OptiPNG/optipng-0.7.7/optipng-0.7.7.tar.gz && \
 RUN /opt/bin/curl -fsSL -o /root/optipng.tar.gz \
         --resolve downloads.sourceforge.net:443:216.105.38.13 \
         https://downloads.sourceforge.net/project/optipng/OptiPNG/optipng-0.7.7/optipng-0.7.7.tar.gz && \

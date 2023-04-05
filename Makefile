@@ -26,7 +26,7 @@ $(TAR_PATH): build
 	docker cp $(IMAGE_NAME)-exec:/opt/$(notdir $@) $@
 	docker rm $(IMAGE_NAME)-exec
 
-build:
+build: files/etc--pki--tls--certs--ca-bundle.crt
 	docker kill $(IMAGE_NAME) || true 2>&1 >/dev/null
 	docker rm $(IMAGE_NAME) || true 2>&1 >/dev/null
 	docker build -t $(IMAGE_NAME) .
@@ -34,5 +34,9 @@ build:
 dist-clean: clean
 
 clean:
+	rm -f files/etc--pki--tls--certs--ca-bundle.crt
 	docker rm $(IMAGE_NAME) || true
 	docker images | grep -q $(IMAGE_NAME) && docker rmi $(IMAGE_NAME) || true
+
+files/etc--pki--tls--certs--ca-bundle.crt:
+	curl -o $@ https://curl.se/ca/cacert.pem
