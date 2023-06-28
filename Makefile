@@ -18,6 +18,7 @@ all: $(BINARY_PATHS)
 
 $(BINARY_PATHS): $(TAR_PATH)
 	tar -zxf $(TAR_PATH) bin/$(notdir $@) -O > $@
+	chmod +x $@
 
 $(TAR_PATH): build
 	mkdir -p $(dir $@)
