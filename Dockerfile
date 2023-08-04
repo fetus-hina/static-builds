@@ -62,7 +62,7 @@ RUN wget --no-check-certificate -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files
     rm -rf /root/libjpeg /tmp/libjpeg.tar.gz
 
 # https://github.com/nghttp2/nghttp2
-RUN wget --no-check-certificate -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.54.0/nghttp2-1.54.0.tar.xz' && \
+RUN wget --no-check-certificate -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.55.1/nghttp2-1.55.1.tar.xz' && \
     mkdir /root/nghttp2 && \
     cd /root/nghttp2 && \
     tar -J -x -v -f /root/nghttp2.tar.xz --strip-components=1 && \
@@ -110,7 +110,7 @@ RUN wget --no-check-certificate -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu
 
 
 # https://www.openssl.org/
-RUN wget --no-check-certificate -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-3.1.1.tar.gz' && \
+RUN wget --no-check-certificate -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-3.1.2.tar.gz' && \
     mkdir /root/openssl && \
     cd /root/openssl && \
     tar -z -x -v -f /root/openssl.tar.gz --strip-components=1 && \
@@ -134,7 +134,7 @@ RUN wget --no-check-certificate -O /root/openssl.tar.gz 'https://www.openssl.org
 
  
 # https://curl.haxx.se/
-RUN wget --no-check-certificate -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-8.1.2.tar.xz' && \
+RUN wget --no-check-certificate -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-8.2.1.tar.xz' && \
     mkdir /root/curl && \
     cd /root/curl && \
     tar -J -x -v -f /root/curl.tar.xz --strip-components=1 && \
