@@ -16,7 +16,6 @@ RUN yum install -y --disablerepo=* \
     rm -rf /var/cache/yum
 COPY files/etc--yum.repos.d--CentOS-SCLo-scl-rh.repo /etc/yum.repos.d/CentOS-SCLo-scl-rh.repo
 RUN yum install -y \
-        cmake \
         devtoolset-8-gcc \
         devtoolset-8-gcc-c++ \
         git \
@@ -36,8 +35,17 @@ COPY files/etc--pki--tls--certs--ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
 RUN cp /etc/pki/tls/certs/ca-bundle.crt /usr/share/pki/ca-trust-source/ca-bundle.trust.crt && \
     update-ca-trust extract
 
+# install CMake
+# https://cmake.org/
+RUN wget --no-check-certificate -O /root/cmake.tar.gz \
+      'https://github.com/Kitware/CMake/releases/download/v3.27.6/cmake-3.27.6-linux-x86_64.tar.gz' && \
+    tar -zxf /root/cmake.tar.gz -C /usr/local --strip-components=1 && \
+    rm -rf /root/cmake.tar.gz && \
+    hash -r && \
+    cmake --version
+
 # http://zlib.net/
-RUN wget --no-check-certificate -O /root/zlib.tar.xz 'http://zlib.net/zlib-1.2.13.tar.xz' && \
+RUN wget --no-check-certificate -O /root/zlib.tar.xz 'http://zlib.net/zlib-1.3.tar.xz' && \
     mkdir /root/zlib && \
     cd /root/zlib && \
     tar -J -x -v -f /root/zlib.tar.xz --strip-components=1 && \
@@ -62,7 +70,7 @@ RUN wget --no-check-certificate -O /tmp/libjpeg.tar.gz 'http://www.ijg.org/files
     rm -rf /root/libjpeg /tmp/libjpeg.tar.gz
 
 # https://github.com/nghttp2/nghttp2
-RUN wget --no-check-certificate -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.55.1/nghttp2-1.55.1.tar.xz' && \
+RUN wget --no-check-certificate -O /root/nghttp2.tar.xz 'https://github.com/nghttp2/nghttp2/releases/download/v1.56.0/nghttp2-1.56.0.tar.xz' && \
     mkdir /root/nghttp2 && \
     cd /root/nghttp2 && \
     tar -J -x -v -f /root/nghttp2.tar.xz --strip-components=1 && \
@@ -110,7 +118,7 @@ RUN wget --no-check-certificate -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu
 
 
 # https://www.openssl.org/
-RUN wget --no-check-certificate -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-3.1.2.tar.gz' && \
+RUN wget --no-check-certificate -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-3.1.3.tar.gz' && \
     mkdir /root/openssl && \
     cd /root/openssl && \
     tar -z -x -v -f /root/openssl.tar.gz --strip-components=1 && \
@@ -134,7 +142,7 @@ RUN wget --no-check-certificate -O /root/openssl.tar.gz 'https://www.openssl.org
 
  
 # https://curl.haxx.se/
-RUN wget --no-check-certificate -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-8.2.1.tar.xz' && \
+RUN wget --no-check-certificate -O /root/curl.tar.xz 'https://curl.haxx.se/download/curl-8.3.0.tar.xz' && \
     mkdir /root/curl && \
     cd /root/curl && \
     tar -J -x -v -f /root/curl.tar.xz --strip-components=1 && \
