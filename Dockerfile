@@ -149,54 +149,58 @@ RUN wget --no-check-certificate -O /root/curl.tar.xz 'https://curl.haxx.se/downl
     scl enable devtoolset-8 -- env LD_FLAGS="-static" PKG_CONFIG="pkg-config --static" ./configure \
         --prefix=/opt/curl \
         --bindir=/opt/bin \
-        --disable-debug \
-        --enable-optimize \
-        --enable-warnings \
-        --disable-werror \
         --disable-curldebug \
-        --enable-symbol-hiding \
-        --enable-ares=/opt/c-ares \
-        --disable-shared \
-        --enable-static \
-        --enable-http \
-        --enable-ftp \
-        --enable-file \
+        --disable-debug \
+        --disable-dict \
+        --disable-dnsshuffle \
+        --disable-doh \
+        --disable-gopher \
         --disable-ldap \
         --disable-ldaps \
-        --disable-rtsp \
-        --enable-proxy \
-        --disable-dict \
-        --enable-telnet \
-        --enable-tftp \
-        --enable-pop3 \
-        --enable-imap \
-        --disable-smb \
-        --enable-smtp \
-        --disable-gopher \
-        --disable-manual \
         --disable-libcurl-option \
-        --enable-ipv6 \
-        --disable-threaded-resolver \
-        --disable-pthreads \
-        --enable-verbose \
-        --disable-sspi \
-        --enable-crypto-auth \
+        --disable-manual \
         --disable-ntlm \
         --disable-ntlm-wb \
+        --disable-proxy \
+        --disable-pthreads \
+        --disable-rtsp \
+        --disable-shared \
+        --disable-smb \
+        --disable-sspi \
+        --disable-threaded-resolver \
         --disable-tls-srp \
-        --enable-unix-sockets \
+        --disable-werror \
+        --enable-ares=/opt/c-ares \
         --enable-cookies \
-        --with-pic \
-        --with-zlib=/opt/zlib \
-        --without-brotli \
-        --with-ssl=/opt/openssl \
-        --with-random=/dev/urandom \
+        --enable-crypto-auth \
+        --enable-file \
+        --enable-ftp \
+        --enable-http \
+        --enable-imap \
+        --enable-ipv6 \
+        --enable-optimize \
+        --enable-pop3 \
+        --enable-smtp \
+        --enable-static \
+        --enable-symbol-hiding \
+        --enable-telnet \
+        --enable-tftp \
+        --enable-unix-sockets \
+        --enable-verbose \
+        --enable-warnings \
         --with-ca-bundle=/etc/pki/tls/certs/ca-bundle.crt \
         --with-ca-path=/etc/pki/tls/certs \
-        --without-librtmp \
-        --with-nghttp2=/opt/nghttp2 \
         --with-libidn2=/opt/libidn2 \
-        --without-zsh-functions-dir && \
+        --with-nghttp2=/opt/nghttp2 \
+        --with-pic \
+        --with-random=/dev/urandom \
+        --with-ssl=/opt/openssl \
+        --with-zlib=/opt/zlib \
+        --without-brotli \
+        --without-librtmp \
+        --without-ngtcp2 \
+        --without-zsh-functions-dir \
+        --without-zstd && \
     scl enable devtoolset-8 -- make curl_LDFLAGS="-all-static" -j 4 && \
     scl enable devtoolset-8 -- make curl_LDFLAGS="-all-static" install && \
     strip /opt/bin/curl && \
