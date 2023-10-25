@@ -118,7 +118,7 @@ RUN wget --no-check-certificate -O /root/libidn2.tar.gz 'https://ftp.gnu.org/gnu
 
 
 # https://www.openssl.org/
-RUN wget --no-check-certificate -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-3.1.3.tar.gz' && \
+RUN wget --no-check-certificate -O /root/openssl.tar.gz 'https://www.openssl.org/source/openssl-3.1.4.tar.gz' && \
     mkdir /root/openssl && \
     cd /root/openssl && \
     tar -z -x -v -f /root/openssl.tar.gz --strip-components=1 && \
